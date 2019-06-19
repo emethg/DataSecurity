@@ -35,7 +35,7 @@ def setblood(request, form):
 def getblood(request):
     DB_KEY = os.environ.get('DB_KEY_DS')
     if 'log' in request.session:
-        url = 'http://securedata.rubnet.fr/dataApi/dataMedical/Blood?ID=' + request.session['id']
+        url = 'http://securedata.rubnet.fr/dataApi/dataMedical/Blood?ID=' + request.session['ID']
         payload = {}
         headers = {
             'x-api-key': DB_KEY
@@ -70,13 +70,16 @@ def seturine(request, form):
 def geturine(request):
     DB_KEY = os.environ.get('DB_KEY_DS')
     if 'log' in request.session:
-        url = 'http://securedata.rubnet.fr/dataApi/dataMedical/Urine?ID='+request.session['id']
+        url = 'http://securedata.rubnet.fr/dataApi/dataMedical/Urine?ID='+request.session['RID']
         payload = {}
         headers = {
             'x-api-key': DB_KEY
         }
         response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False).json()
-        return response
+        if len(response['msg']):
+            return response['msg']
+        else:
+            return False
     else:
         return False
 

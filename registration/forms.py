@@ -1,5 +1,6 @@
 from django import forms
 from django.core.validators import validate_email
+import re
 
 
 class RegisterForm(forms.Form):
@@ -18,7 +19,8 @@ class RegisterForm(forms.Form):
             return True
 
     def check_mail(self):
-        if validate_email(self.data['email']):
+        # if validate_email(self.data['email']):
+        if re.search(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', self.data['email'], re.I):
             return True
         else:
             return False

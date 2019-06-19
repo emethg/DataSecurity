@@ -24,8 +24,9 @@ def log_in(request, id, password):
                 request.session.save()
                 request.session['id'] = request.session.session_key
                 test = request.session.session_key
-                request.session.set_expiry(100)
+                request.session.set_expiry(100000)
             request.session['ID'] = response['userInfo']['ID']
+            request.session['RID'] = response['userInfo']['ID']
             request.session['type'] = response['userInfo']['Type']
             request.session['du'] = response['userInfo']['diabetes']
             request.session['log'] = 1
