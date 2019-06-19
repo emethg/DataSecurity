@@ -55,16 +55,15 @@
 		
 							<li><a class="menu" href="#team">our team</a></li>
 
-							{% if request.session.haskey(log') %}
+							{% if not request.session.log %}
 							
 							<li><a class="menu" href="{% url 'login_form' %}">login</a></li>
 
 							<li><a class="menu" href="{% url 'register_form' %}">register</a></li>
-
 							
 							{% else %}
 							
-							<li><a class="menu" href="{% url 'logout' %}">register</a></li>
+							<li><a class="menu" href="{% url 'logout' %}">logout</a></li>
 							{% endif %}
 					      </ul>
 					    </div><!-- /navbar-collapse -->
