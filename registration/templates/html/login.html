@@ -1,0 +1,28 @@
+
+
+{% extends 'html/layout.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="slider" id="home">
+  
+</section>
+<section class="service text-center" id="home" >
+
+    <div class="container">
+        <form method="POST">
+          <div class="container" action="">{% csrf_token %}
+            <hr>
+              {{form.as_p}}
+            <hr>
+            <button type="submit" class="loginbtn">Login</button>
+          </div>
+        </form>
+      </div>
+  
+
+</section>
+
+
+{% endblock %}
