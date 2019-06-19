@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import validate_email
 
 
 class RegisterForm(forms.Form):
@@ -16,9 +17,15 @@ class RegisterForm(forms.Form):
         else:
             return True
 
+    def check_mail(self):
+        if validate_email(self.data['email']):
+            return True
+        else:
+            return False
+
     def is_valid(self):
         valid = super(RegisterForm,self).is_valid()
-        if valid and self.check_RID():
+        if valid and self.check_RID() and self.check_mail():
             return True
         else:
             return False
@@ -75,15 +82,15 @@ class SetBloodForm(forms.Form):
 
 
 class SetUrineForm(forms.Form):
-    RID = forms.CharField(label='RID', max_length=100)
-    PH = forms.CharField(label='PH', max_length=100)
-    Nitrit = forms.CharField(label='Nitrit', max_length=100)
-    Ketone = forms.CharField(label='Ketone', max_length=100)
-    Urobilinogen = forms.CharField(label='Urobilinogen', max_length=100)
-    Bilirubin = forms.CharField(label='Bilirubin', max_length=100)
-    Leucocytes = forms.CharField(label='Leucocytes', max_length=100)
-    Erythrocytes = forms.CharField(label='Erythrocytes', max_length=100)
-    Albumin = forms.CharField(label='Albumin', max_length=100)
+    RID = forms.CharField(label='RID', max_length=9)
+    PH = forms.DecimalField(label='PH', max_value=10, min_value=0, decimal_places=2)
+    Nitrit = forms.DecimalField(label='Nitrit', max_value=10, min_value=0, decimal_places=2)
+    Ketone = forms.DecimalField(label='Ketone', max_value=10, min_value=0, decimal_places=2)
+    Urobilinogen = forms.DecimalField(label='Urobilinogen', max_value=10, min_value=0, decimal_places=2)
+    Bilirubin = forms.DecimalField(label='Bilirubin', max_value=10, min_value=0, decimal_places=2)
+    Leucocytes = forms.DecimalField(label='Leucocytes', max_value=10, min_value=0, decimal_places=2)
+    Erythrocytes = forms.DecimalField(label='Erythrocytes', max_value=10, min_value=0, decimal_places=2)
+    Albumin = forms.DecimalField(label='Albumin', max_value=10, min_value=0, decimal_places=2)
 
     def check_RID(self):
         if len(self.data['RID']) != 9:
@@ -100,13 +107,13 @@ class SetUrineForm(forms.Form):
 
 class SetDiabeteForm(forms.Form):
     RID = forms.CharField(label='RID', max_length=100)
-    Glucose = forms.CharField(label='Glucose', max_length=100)
-    Albumin = forms.CharField(label='Albumin', max_length=100)
-    FGP = forms.CharField(label='FGP', max_length=100)
-    RPG = forms.CharField(label='RPG', max_length=100)
-    CGTT = forms.CharField(label='CGTT', max_length=100)
-    CapillaryGlucose = forms.CharField(label='CapillaryGlucose', max_length=100)
-    HBA1C = forms.CharField(label='HBA1C', max_length=100)
+    Glucose = forms.DecimalField(label='Glucose', max_value=10, min_value=0, decimal_places=2)
+    Albumin = forms.DecimalField(label='Albumin', max_value=10, min_value=0, decimal_places=2)
+    FGP = forms.DecimalField(label='FGP', max_value=10, min_value=0, decimal_places=2)
+    RPG = forms.DecimalField(label='RPG', max_value=10, min_value=0, decimal_places=2)
+    CGTT = forms.DecimalField(label='CGTT', max_value=10, min_value=0, decimal_places=2)
+    CapillaryGlucose = forms.DecimalField(label='CapillaryGlucose', max_value=10, min_value=0, decimal_places=2)
+    HBA1C = forms.DecimalField(label='HBA1C', max_value=10, min_value=0, decimal_places=2)
 
     def check_RID(self):
         if len(self.data['RID']) != 9:

@@ -110,3 +110,16 @@ def getdiabete(request):
         return response
     else:
         False
+
+def getid(request):
+    DB_KEY = os.environ.get('DB_KEY_DS')
+    if request.session['log']:
+        url = 'http://securedata.rubnet.fr/dataApi/User/Allid'
+        payload = {}
+        headers = {
+            'x-api-key': DB_KEY
+        }
+        response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False).json()
+        return response['msg']
+    else:
+        return False

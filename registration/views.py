@@ -2,9 +2,10 @@ from django.shortcuts import render, HttpResponse, redirect
 import requests
 from .forms import RegisterForm, LoginForm, SetBloodForm, SetUrineForm, SetDiabeteForm
 from .auth import log_in, reg
-from .encrypt import encryptWord, encryptPassword, CheckPassword
-from .getpost import setblood, getblood, seturine, geturine, getdiabete, setdiabete
+from .encrypt import encryptWord, encryptPassword, CheckPassword, decryptWord
+from .getpost import setblood, getblood, seturine, geturine, getdiabete, setdiabete, getid
 from django.contrib.auth import authenticate
+
 
 
 def index_view(request):
@@ -75,7 +76,11 @@ def test_session_id(request):
 def setblood_view(request):
     if request.method == 'GET':
         form = SetBloodForm()
-        args = {'form' : form, 'data': 1}
+        datacrypt = getid(request)
+        datadecrypt = []
+        for id in datacrypt:
+            datadecrypt.append(decryptWord(id))
+        args = {'form' : form, 'data': datadecrypt}
         return render(request, 'html/setblood.html', args)
     if request.method == 'POST':
         form = SetBloodForm(request.POST)
@@ -95,7 +100,11 @@ def getblood_view(request):
 def seturine_view(request):
     if request.method == 'GET':
         form = SetUrineForm()
-        args = {'form' : form}
+        datacrypt = getid(request)
+        datadecrypt = []
+        for id in datacrypt:
+            datadecrypt.append(decryptWord(id))
+        args = {'form' : form, 'data' : datadecrypt}
         return render(request, 'html/seturine.html', args)
     if request.method == 'POST':
         form = SetUrineForm(request.POST)
@@ -111,7 +120,11 @@ def geturine_view(request):
 def setdiabete_view(request):
     if request.method == 'GET':
         form = SetDiabeteForm()
-        args = {'form' : form}
+        datacrypt = getid(request)
+        datadecrypt = []
+        for id in datacrypt:
+            datadecrypt.append(decryptWord(id))
+        args = {'form' : form, 'data' : datadecrypt}
         return render(request, 'html/setdiabete.html', args)
     if request.method == 'POST':
         form = SetDiabeteForm(request.POST)
