@@ -1,0 +1,83 @@
+{% extends 'html/layout.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="text-center" id="home" >
+
+{% if data %}
+
+    
+     <div class="container">
+            <h2>Resultat of urine</h2>
+            <p>:</p>            
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>DATE</th>
+                  <th>ID</th>
+                  <th>Albumin</th>
+                  <th>PH</th>
+                  <th>Nitrit</th>
+                  <th>Ketone</th>
+
+                  
+                  <th>Urobilinogen</th>
+                  <th>Bilirubin</th>
+                  <th>Leucocytes</th>
+                  <th>Erythrocytes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for element in data%}  
+                     
+                     <tr>
+                            <td>{{element.DateOfDemand}}</td>
+                           <td>{{element.ID}}</td>
+                             <td>{{element.Albumin}}</td>
+                        <td>{{element.PH}}</td>
+                            <td>{{element.Nitrit}}</td>
+                        <td>{{element.Ketone}}</td>
+                        <td>{{element.Urobilinogen}}</td>
+                        <td>{{element.Bilirubin}}</td>
+                        <td>{{element.Leucocytes}}</td>
+                        <td>{{element.Erythrocytes}}</td>
+                    </tr>
+                   
+                {%endfor%}
+                         
+               
+              
+              </tbody>
+            </table>
+          </div>
+        
+            
+
+
+            
+    
+{% else %}
+
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+        <div class="alert alert-danger" role="alert">
+                No data
+              </div>
+</div>
+<div class="col-md-4"></div>
+
+
+
+</div>
+
+
+
+
+{% endif %}
+
+</section>
+
+{% endblock %}

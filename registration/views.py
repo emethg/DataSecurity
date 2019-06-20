@@ -115,7 +115,12 @@ def seturine_view(request):
 
 def geturine_view(request):
     response = geturine(request)
-    return HttpResponse(response['msg'])
+    args = {'data' : response}
+    return render(request, 'html/geturine.html', args)
+    # if response:
+        
+    # else:
+    #     return HttpResponse('There is no information for this user')
 
 def setdiabete_view(request):
     if request.method == 'GET':
