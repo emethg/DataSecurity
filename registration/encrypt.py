@@ -26,7 +26,7 @@ def decryptWord(request):
         'x-api-key': DB_KEY
     }
     response = requests.request('POST', url, headers = headers, data = payload, allow_redirects=False).json()
-    decryption = response['value']
+    decryption = response['Value']
     return decryption
 
 

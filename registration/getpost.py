@@ -42,7 +42,7 @@ def getblood(request):
         }
         response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False).json()
         if len(response['msg']):
-            return response['msg'][0]
+            return response['msg']
         else:
             return False
     else:
