@@ -1,6 +1,6 @@
 import requests
 import os
-from .encrypt import encryptWord
+from .encrypt import encryptWord, decryptWord
 
 
 def setblood(request, form):
@@ -116,6 +116,7 @@ def getdiabete(request):
 
 def getid(request):
     DB_KEY = os.environ.get('DB_KEY_DS')
+    lst = []
     if request.session['log']:
         url = 'http://securedata.rubnet.fr/dataApi/User/Allid'
         payload = {}
@@ -123,6 +124,9 @@ def getid(request):
             'x-api-key': DB_KEY
         }
         response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False).json()
-        return response['msg']
+        for element in response['msg']:
+            element = decryptWord(element)
+            lst.append(tuple([element, element]))
+        return lst
     else:
         return False

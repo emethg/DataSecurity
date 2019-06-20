@@ -63,6 +63,10 @@ def logout_view(request):
             del request.session['log']
         except:
             pass
+        try:
+            del request.session['type']
+        except:
+            pass
         return redirect('/')
     else:
         return HttpResponse('You can not acces this page, you are already logged in')
@@ -93,21 +97,32 @@ def setblood_view(request):
 
 def getblood_view(request):
     response = getblood(request)
-    args = {'data' : response}
-    return render(request, 'html/geturine.html', args)
+    if response:
+        new_response = []
+        for x in response:
+            print(x)
+            for k, v in x.items():
+                if k == 'DateOfDemand':
+                    pass
+                else:
+                    x[k] = decryptWord(v)
+            new_response.append(x)
+        args = {'data' : new_response}
+    else:
+        args = {'data' : response}
+    return render(request, 'html/getblood.html', args)
 
 def seturine_view(request):
     if request.method == 'GET':
        
         form = SetUrineForm()
+        
         datacrypt = getid(request)
+        form.fields['RID'].choices = datacrypt
+        #form.RID.CHOICES=datacrypt
         datadecrypt = []
-        for id in datacrypt:
-            datadecrypt.append(decryptWord(id))
-        args = {'form' : form, 'data' : datadecrypt}
-        response =render(request, 'html/seturine.html', args)
-        response.set_cookie('last_connection', datetime.datetime.now())
-        return response
+        args = {'form' : form}
+        return render(request, 'html/seturine.html', args)
     if request.method == 'POST':
         form = SetUrineForm(request.POST)
         if(form.is_valid()):
@@ -117,7 +132,19 @@ def seturine_view(request):
 
 def geturine_view(request):
     response = geturine(request)
-    args = {'data' : response}
+    if response:
+        new_response = []
+        for x in response:
+            print(x)
+            for k, v in x.items():
+                if k == 'DateOfDemand':
+                    pass
+                else:
+                    x[k] = decryptWord(v)
+            new_response.append(x)
+        args = {'data' : new_response}
+    else:
+        args = {'data' : response}
     return render(request, 'html/geturine.html', args)
     # if response:
         
@@ -127,6 +154,7 @@ def geturine_view(request):
 def setdiabete_view(request):
     if request.method == 'GET':
         form = SetDiabeteForm()
+        choice=getid(request)
         datacrypt = getid(request)
         datadecrypt = []
         for id in datacrypt:
