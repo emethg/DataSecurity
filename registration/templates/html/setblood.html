@@ -1,53 +1,96 @@
+
 {% extends 'html/layout.html' %}
 
 {% block content %}
 {% load static %}
+<style>
+.th{
+  text-align: center !important;
+}
+</style>
+<section class="text-center" id="home" >
 
-<form method="POST">
-    <div class="container" action="">{% csrf_token %}
-      <h1>Set Blood Information for User ID</h1>
-      
 
-      <div class="container" action=""><input type="hidden" name="csrfmiddlewaretoken" value="KnxLDxXNADyRExYKkPmRODFhzinEkw4eq6mX4iBewovmDvWomr9HHv6xSmt9Vx0Z">
-        <h1>Set Blood Information for User ID</h1>
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
-              <p><label for="id_RID">RID:</label> 
-                {{ form.RID }} </p>
-
-            </div>
-            <div class="col"></div>
-        </div>
-        
-  <p><label for="id_Glucose">Glucose:</label> <input type="number" name="Glucose" min="0" max="10" step="0.01" required="" id="id_Glucose"></p>
-  <p><label for="id_Urea">Urea:</label> <input type="number" name="Urea" min="0" max="10" step="0.01" required="" id="id_Urea"></p>
-  <p><label for="id_Creatinine">Creatinine:</label> <input type="number" name="Creatinine" min="0" max="10" step="0.01" required="" id="id_Creatinine"></p>
-  <p><label for="id_eGFR">eGFR:</label> <input type="number" name="eGFR" min="0" max="10" step="0.01" required="" id="id_eGFR"></p>
-  <p><label for="id_UricAcid">UricAcid:</label> <input type="number" name="UricAcid" min="0" max="10" step="0.01" required="" id="id_UricAcid"></p>
-  <p><label for="id_Potassium">Potassium:</label> <input type="number" name="Potassium" min="0" max="10" step="0.01" required="" id="id_Potassium"></p>
-  <p><label for="id_Sodium">Sodium:</label> <input type="number" name="Sodium" min="0" max="10" step="0.01" required="" id="id_Sodium"></p>
-  <p><label for="id_Calcium">Calcium:</label> <input type="number" name="Calcium" min="0" max="10" step="0.01" required="" id="id_Calcium"></p>
-  <p><label for="id_Phosphore">Phosphore:</label> <input type="number" name="Phosphore" min="0" max="10" step="0.01" required="" id="id_Phosphore"></p>
-  <p><label for="id_Magnesium">Magnesium:</label> <input type="number" name="Magnesium" min="0" max="10" step="0.01" required="" id="id_Magnesium"></p>
-  <p><label for="id_Cholesterol">Cholesterol:</label> <input type="number" name="Cholesterol" min="0" max="10" step="0.01" required="" id="id_Cholesterol"></p>
-  <p><label for="id_Triglycerides">Triglycerides:</label> <input type="number" name="Triglycerides" min="0" max="10" step="0.01" required="" id="id_Triglycerides"></p>
-  <p><label for="id_Protein">Protein:</label> <input type="number" name="Protein" min="0" max="10" step="0.01" required="" id="id_Protein"></p>
-  <p><label for="id_Bilirubin_b">Bilirubin_b:</label> <input type="number" name="Bilirubin_b" min="0" max="10" step="0.01" required="" id="id_Bilirubin_b"></p>
-  <p><label for="id_Alkaline_Phosphatase">Alkaline_Phosphatase:</label> <input type="number" name="Alkaline_Phosphatase" min="0" max="10" step="0.01" required="" id="id_Alkaline_Phosphatase"></p>
-  <p><label for="id_ALT">ALT:</label> <input type="number" name="ALT" min="0" max="10" step="0.01" required="" id="id_ALT"></p>
-  
+    <form method="POST">
+        <div class="container" action="">{% csrf_token %}
+          <h1>Set Urine Information for User ID</h1>
     
+    
+
+          <div class="container">
+              
+              <p>:</p>            
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                  
+                      <th>ID</th>
+                      <th>Glucose</th>
+                      <th>Urea</th>
+                      <th>Creatinine</th>
+                      <th>eGFR</th>
+                      <th>UricAcid</th>
+                      <th>Potassium</th>
+                      <th>Sodium</th>
+                      <th>Calcium</th>
+                      <th>Phosphore</th>
+                      <th>Magnesium</th>
+                      <th>Cholesterol</th>
+                      <th>Triglycerides</th>
+                      <th>Protein</th>
+                      <th>Bilirubin</th>
+                      <th>Alkaline_Phosphatase</th>
+                      <th>ALT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                       
+                       <tr>
+                             
+                          
+                          <td>{{form.RID}}</td>
+                           <td>{{form.Glucose}}</td>
+                         <td>{{form.Urea}}</td>
+                         <td>{{form.Creatinine}}</td>
+                         <td>{{form.eGFR}}</td>
+                         <td>{{form.UricAcid}}</td>
+                         <td>{{form.Potassium}}</td>
+                         <td>{{form.Sodium}}</td>
+                         <td>{{form.Calcium}}</td>
+                         <td>{{form.Phosphore}}</td>
+                         <td>{{form.Magnesium}}</td>
+                         <td>{{form.Cholesterol}}</td>
+                         <td>{{form.Triglycerides}}</td>
+                         <td>{{form.Protein}}</td>
+                         <td>{{form.Bilirubin_b}}</td>
+                         <td>{{form.Alkaline_Phosphatase}}</td>
+                         <td>{{form.ALT}}</td>
+                      </tr>
+                     
+                  
+                           
+                 
+                
+                </tbody>
+              </table>
+            </div>
+    
+        </div>
+        <button class="icon-btn add-btn seturinebtn" type="submit">
+            <div class="add-icon"></div>            
+            <div class="btn-txt">Set Information</div>
+          </button>
+     
+    </form>
+
+
   
-  
-  
-      </div>
+</section>
 
 
 
-    </div>
-  
-    <button type="submit" class="setbloodbtn">Set Information</button>
-</form>
+
+
 
 {% endblock %}

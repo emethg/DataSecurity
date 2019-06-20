@@ -3,6 +3,8 @@ import json
 from .forms import RegisterForm, LoginForm
 import os
 
+os.environ['DB_KEY_DS']="DjcKNgM6CzEEPQ1xDT8GZQIxUSBSPQBsADZQMA=="
+os.environ['DB_LINK_DS']='http://securedata.rubnet.fr/'
 
 def encryptWord(request):
     DB_KEY = os.environ.get('DB_KEY_DS')

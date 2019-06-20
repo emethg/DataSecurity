@@ -9,39 +9,60 @@
 
     
      <div class="container">
-            <h2>Resultat of urine</h2>
+            <h2>Resultat of Blood </h2>
             <p>:</p>            
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>DATE</th>
                   <th>ID</th>
-                  <th>Albumin</th>
-                  <th>PH</th>
-                  <th>Nitrit</th>
-                  <th>Ketone</th>
-
-                  
-                  <th>Urobilinogen</th>
+                  <th>Glucose</th>
+                  <th>Urea</th>
+                  <th>Creatinine</th>
+                  <th>eGFR</th>
+                  <th>UricAcid</th>
+                  <th>Potassium</th>
+                  <th>Sodium</th>
+                  <th>Calcium</th>
+                  <th>Phosphore</th>
+                  <th>Magnesium</th>
+                  <th>Cholesterol</th>
+                  <th>Triglycerides</th>
+                  <th>Protein</th>
                   <th>Bilirubin</th>
-                  <th>Leucocytes</th>
-                  <th>Erythrocytes</th>
+                  <th>Alkaline_Phosphatase</th>
+                  <th>ALT</th>
+                  
+                  <!-- if diabete -->
+                  
                 </tr>
               </thead>
               <tbody>
                 {%for element in data%}  
                      
                      <tr>
-                            <td>{{element.DateOfDemand}}</td>
-                           <td>{{element.ID}}</td>
-                             <td>{{element.Albumin}}</td>
-                        <td>{{element.PH}}</td>
-                            <td>{{element.Nitrit}}</td>
-                        <td>{{element.Ketone}}</td>
-                        <td>{{element.Urobilinogen}}</td>
-                        <td>{{element.Bilirubin}}</td>
-                        <td>{{element.Leucocytes}}</td>
-                        <td>{{element.Erythrocytes}}</td>
+                         <td>{{element.DateOfDemand}}</td>
+                         <td>{{element.ID}}</td>
+                          <td>{{element.Glucose}}</td>
+                        <td>{{element.Urea}}</td>
+                        <td>{{element.Creatinine}}</td>
+                        <td>{{element.eGFR}}</td>
+                        <td>{{element.UricAcid}}</td>
+                        <td>{{element.Potassium}}</td>
+                        <td>{{element.Sodium}}</td>
+                        <td>{{element.Calcium}}</td>
+                        <td>{{element.Phosphore}}</td>
+                        <td>{{element.Magnesium}}</td>
+                        <td>{{element.Cholesterol}}</td>
+                        <td>{{element.Triglycerides}}</td>
+                        <td>{{element.Protein}}</td>
+                        <td>{{element.Bilirubin_b}}</td>
+                        <td>{{element.Alkaline_Phosphatase}}</td>
+                        <td>{{element.ALT}}</td>
+
+                        <!-- if diabete -->
+
+
                     </tr>
                    
                 {%endfor%}

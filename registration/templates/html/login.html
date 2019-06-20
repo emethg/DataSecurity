@@ -5,6 +5,7 @@
 {% block content %}
 {% load static %}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 
 <style>
 
@@ -159,8 +160,9 @@
 
 
         <form class="form" method="POST">
-            <h1>Login</h1>
-        
+          
+            <div class="change log">
+                <h1>Login</h1>
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
@@ -176,6 +178,21 @@
             {% endfor %}
         
             <input type="submit" value="Login">
+            <a href="#" rel="login" style="color: white"> Forgot Password?</a>
+
+          </div>
+
+          <div class="change forgot" hidden>
+              <h1>resetPassword</h1>
+
+              <div class="form-group">
+               
+                  <input type="email" id="mailFor" placeholder="johndoe@example.com">
+              </div>
+              <input type="submit" value="Reset" id="loginBtn" onclick="ResetMail()"></input>
+              <a href="#"  rel="forgot" style="color: white"> Login</a>
+
+          </div>
         
           </form> 
 
@@ -186,6 +203,69 @@
   
 <hr>
 </section>
+
+
+
+<script type="text/javascript">
+  $('.change').on('click', 'a', function () {
+      var ba = $(this).attr('rel');
+      
+      if(ba=="login"){
+          $('.log').fadeOut(50);
+          $('.forgot').fadeIn(500);
+      }
+      if(ba=="forgot"){
+          $('.log').fadeIn(500);
+          $('.forgot').fadeOut(50);
+      }
+     
+      
+    
+  });
+
+
+
+
+function ResetMail() {
+
+event.preventDefault();
+
+Encrypter( $("#mailFor").val())
+
+}
+
+
+function Encrypter(params) {
+
+
+
+$.ajax({
+   url: "http://securedata.rubnet.fr/sercureApi/encrypVar",
+   data: { "word": params },
+   type: "POST",
+  beforeSend: function(xhr){xhr.setRequestHeader("x-api-key", "DjcKNgM6CzEEPQ1xDT8GZQIxUSBSPQBsADZQMA==");},
+   success: function(data) { 
+;
+$.ajax({
+   url: "http://securedata.rubnet.fr/dataApi/User/resetPassword",
+   data: { "email": data.value },
+   type: "POST",
+  beforeSend: function(xhr){xhr.setRequestHeader("x-api-key", "DjcKNgM6CzEEPQ1xDT8GZQIxUSBSPQBsADZQMA==");},
+   success: function(data) { alert(data.msg[0] ); }
+    });
+
+
+}
+});
+
+
+
+}
+
+</script>
+
+
+
 
 
 {% endblock %}
