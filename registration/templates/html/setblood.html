@@ -84,7 +84,38 @@
      
     </form>
 
+<script>
+var arr=[]
+$( document ).ready(function() {
+  test();
+  $('input').on('change',function() {
 
+   arr[$(this).attr('id')]=$(this).val();
+   
+    c=arr.join('#')
+
+    for (const [key, value] of Object.entries(arr)) {
+        if(c!='')c+='&'
+        c+= key+':'+value;
+      }
+    
+  $.cookie('tofc',c , { expires: 7 });
+
+  })
+});
+
+
+function test() {
+  var data= $.cookie('tofc'); // => "value"
+  fata=data.split('&');  
+  fata.forEach(element => {
+    consi=element.split(':')
+    $('#'+consi[0]).val(consi[1])
+    
+  });
+  
+}
+</script>
   
 </section>
 

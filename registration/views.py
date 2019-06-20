@@ -1,10 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
-import requests
+import requests,datetime
 from .forms import RegisterForm, LoginForm, SetBloodForm, SetUrineForm, SetDiabeteForm
 from .auth import log_in, reg
 from .encrypt import encryptWord, encryptPassword, CheckPassword, decryptWord
 from .getpost import setblood, getblood, seturine, geturine, getdiabete, setdiabete, getid
 from django.contrib.auth import authenticate
+
 
 
 
@@ -97,13 +98,16 @@ def getblood_view(request):
 
 def seturine_view(request):
     if request.method == 'GET':
+       
         form = SetUrineForm()
         datacrypt = getid(request)
         datadecrypt = []
         for id in datacrypt:
             datadecrypt.append(decryptWord(id))
         args = {'form' : form, 'data' : datadecrypt}
-        return render(request, 'html/seturine.html', args)
+        response =render(request, 'html/seturine.html', args)
+        response.set_cookie('last_connection', datetime.datetime.now())
+        return response
     if request.method == 'POST':
         form = SetUrineForm(request.POST)
         if(form.is_valid()):
