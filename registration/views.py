@@ -1,10 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
-import requests
+import requests,datetime
 from .forms import RegisterForm, LoginForm, SetBloodForm, SetUrineForm, SetDiabeteForm
 from .auth import log_in, reg
 from .encrypt import encryptWord, encryptPassword, CheckPassword, decryptWord
 from .getpost import setblood, getblood, seturine, geturine, getdiabete, setdiabete, getid
 from django.contrib.auth import authenticate
+
 
 
 
