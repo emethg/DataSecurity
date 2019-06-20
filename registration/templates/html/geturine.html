@@ -20,8 +20,10 @@
                   <th>PH</th>
                   <th>Nitrit</th>
                   <th>Ketone</th>
-
-                  
+                  <th>Urobilinogen</th>
+                  <th>Bilirubin</th>
+                  <th>Leucocytes</th>
+                  <th>Erythrocytes</th>
                   <th>Urobilinogen</th>
                   <th>Bilirubin</th>
                   <th>Leucocytes</th>
@@ -30,24 +32,29 @@
               </thead>
               <tbody>
                 {%for element in data%}  
-                     
-                     <tr>
-                            <td>{{element.DateOfDemand}}</td>
-                           <td>{{element.ID}}</td>
-                             <td>{{element.Albumin}}</td>
-                        <td>{{element.PH}}</td>
-                            <td>{{element.Nitrit}}</td>
-                        <td>{{element.Ketone}}</td>
-                        <td>{{element.Urobilinogen}}</td>
-                        <td>{{element.Bilirubin}}</td>
-                        <td>{{element.Leucocytes}}</td>
-                        <td>{{element.Erythrocytes}}</td>
+                    <tr>
+                        <td>{{element.DateOfDemand}}</td>
+                        <td>{{element.ID}}</td>
+                        <td>{{element.Glucose}}</td>
+                        <td>{{element.Urea}}</td>
+                        <td>{{element.Creatinine}}</td>
+                        <td>{{element.eGFR}}</td>
+                        <td>{{element.UricAcid}}</td>
+                        <td>{{element.Potassium}}</td>
+                        <td>{{element.Sodium}}</td>
+                        <td>{{element.Calcium}}</td>
+                        <td>{{element.Phosphore}}</td>
+                        <td>{{element.Magnesium}}</td>
+                        <td>{{element.Cholesterol}}</td>
+                        <td>{{element.Triglycerides}}</td>
+                        <td>{{element.Phospqahore}}</td>
+                        <td>{{element.Magnaesium}}</td>
+                        <td>{{element.Choldesterol}}</td>
+                        <td>{{element.Triglaycerides}}</td>
                     </tr>
                    
                 {%endfor%}
-                         
-               
-              
+ 
               </tbody>
             </table>
           </div>

@@ -49,7 +49,7 @@ def formView(request):
         return render(request, 'html/login.html', {})
     
 def logout_view(request):
-    if not request.session.has_key('log'):
+    if request.session.has_key('log'):
         try:
             del request.session['id']
         except:
@@ -62,7 +62,7 @@ def logout_view(request):
             del request.session['log']
         except:
             pass
-        return HttpResponse("You Logged out")
+        return redirect('/')
     else:
         return HttpResponse('You can not acces this page, you are already logged in')
         
@@ -92,10 +92,8 @@ def setblood_view(request):
 
 def getblood_view(request):
     response = getblood(request)
-    if response:
-        return HttpResponse(response['msg'])
-    else:
-        return HttpResponse('There is no information for this user')
+    args = {'data' : response}
+    return render(request, 'html/geturine.html', args)
 
 def seturine_view(request):
     if request.method == 'GET':
