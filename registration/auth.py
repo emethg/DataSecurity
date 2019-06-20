@@ -3,7 +3,6 @@ import os
 from .encrypt import encryptWord, encryptPassword, CheckPassword
 from .forms import RegisterForm
 
-
 def log_in(request, id, password):
     encrypted_id = encryptWord(id)
     DB_KEY = os.environ.get('DB_KEY_DS')

@@ -84,7 +84,10 @@ class SetBloodForm(forms.Form):
 
 
 class SetUrineForm(forms.Form):
-    RID = forms.CharField(label='RID', max_length=9)
+    CHOICES = [('341094993', '341094993'), ('2', 'Second')]
+    RID = forms.ChoiceField(label='RID',widget=forms.Select, choices=CHOICES)
+    RID.widget.attrs.update({'class': 'form-control'})
+    # RID = forms.CharField(label='RID', max_length=9)
     PH = forms.DecimalField(label='PH', max_value=10, min_value=0, decimal_places=2)
     Nitrit = forms.DecimalField(label='Nitrit', max_value=10, min_value=0, decimal_places=2)
     Ketone = forms.DecimalField(label='Ketone', max_value=10, min_value=0, decimal_places=2)

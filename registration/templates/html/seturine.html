@@ -1,10 +1,81 @@
-<form method="POST">
-    <div class="container" action="">{% csrf_token %}
-      <h1>Set Urine Information for User ID</h1>
 
-      {{form}}
+{% extends 'html/layout.html' %}
 
-    </div>
+{% block content %}
+{% load static %}
+<style>
+.th{
+  text-align: center !important;
+}
+</style>
+<section class="text-center" id="home" >
+
+
+    <form method="POST">
+        <div class="container" action="">{% csrf_token %}
+          <h1>Set Urine Information for User ID</h1>
+    
+    
+
+          <div class="container">
+              
+              <p>:</p>            
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                  
+                    <th>ID</th>
+                    <th>Albumin</th>
+                    <th>PH</th>
+                    <th>Nitrit</th>
+                    <th>Ketone</th>
   
-    <button type="submit" class="seturinebtn">Set Information</button>
-</form>
+                    
+                    <th>Urobilinogen</th>
+                    <th>Bilirubin</th>
+                    <th>Leucocytes</th>
+                    <th>Erythrocytes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                       
+                       <tr>
+                             
+                             <td>{{form.RID}}</td>
+                               <td>{{form.Albumin}}</td>
+                          <td>{{form.PH}}</td>
+                              <td>{{form.Nitrit}}</td>
+                          <td>{{form.Ketone}}</td>
+                          <td>{{form.Urobilinogen}}</td>
+                          <td>{{form.Bilirubin}}</td>
+                          <td>{{form.Leucocytes}}</td>
+                          <td>{{form.Erythrocytes}}</td>
+                      </tr>
+                     
+                  
+                           
+                 
+                
+                </tbody>
+              </table>
+            </div>
+    
+        </div>
+        <button class="icon-btn add-btn seturinebtn" type="submit">
+            <div class="add-icon"></div>            
+            <div class="btn-txt">Set Information</div>
+          </button>
+     
+    </form>
+
+
+  
+</section>
+
+
+
+
+
+
+{% endblock %}

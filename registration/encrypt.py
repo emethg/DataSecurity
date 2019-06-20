@@ -3,6 +3,8 @@ import json
 from .forms import RegisterForm, LoginForm
 import os
 
+os.environ['DB_KEY_DS']="DjcKNgM6CzEEPQ1xDT8GZQIxUSBSPQBsADZQMA=="
+os.environ['DB_LINK_DS']='http://securedata.rubnet.fr/'
 
 def encryptWord(request):
     DB_KEY = os.environ.get('DB_KEY_DS')
@@ -26,7 +28,7 @@ def decryptWord(request):
         'x-api-key': DB_KEY
     }
     response = requests.request('POST', url, headers = headers, data = payload, allow_redirects=False).json()
-    decryption = response['value']
+    decryption = response['Value']
     return decryption
 
 
