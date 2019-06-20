@@ -1,6 +1,6 @@
 import requests
 import os
-from .encrypt import encryptWord, encryptPassword, CheckPassword
+from .encrypt import encryptWord, encryptPassword, CheckPassword, decryptWord
 from .forms import RegisterForm
 
 def log_in(request, id, password):
@@ -27,8 +27,9 @@ def log_in(request, id, password):
             request.session['ID'] = response['userInfo']['ID']
             request.session['RID'] = response['userInfo']['ID']
             request.session['type'] = response['userInfo']['Type']
-            request.session['du'] = response['userInfo']['diabetes']
+            request.session['du'] = decryptWord(response['userInfo']['diabetes'])
             request.session['log'] = 1
+            
             return True
         else:
             return False
@@ -49,7 +50,7 @@ def reg(request, form):
                     '&LastName='+ encryptWord(form.data['RLastName']) + \
                     '&Email='+ encryptWord(form.data['email']) + \
                     '&DateOfBirth='+ encryptWord(form.data['RDateOfBirth'])+ \
-                    '&diabetes='+ str(form.cleaned_data['diabetes'])
+                    '&diabetes='+ encryptWord(str(form.cleaned_data['diabetes']))
         headers = {
             'x-api-key': DB_KEY,
             'Content-Type': 'application/x-www-form-urlencoded'

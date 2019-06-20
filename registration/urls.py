@@ -9,6 +9,7 @@ urlpatterns = [
     path('test/', views.test_session_id, name='test'),
     path('logout/', views.logout_view, name='logout'),
     path('select/', views.select_view, name='select'),
+    path('set/', views.set_view, name='set'),
     path('setblood/', views.setblood_view, name='setblood'),
     path('getblood/', views.getblood_view, name='getblood'),
     path('seturine/', views.seturine_view, name='seturine'),

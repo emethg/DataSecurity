@@ -1,0 +1,16 @@
+{% extends 'html/layout.html' %}
+
+{% block content %}
+{% load static %}
+
+<ul>
+    
+    <li>
+        <a href="{% url 'setblood' %}">Set your blood information</a>
+    </li>
+    <li>
+        <a href="{% url 'seturine' %}">Set your urine information</a>
+    </li>
+</ul>
+
+{% endblock %}

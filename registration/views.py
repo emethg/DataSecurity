@@ -20,7 +20,7 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if(form.is_valid()):
             response = reg(request, form)
-            render(request, 'html/login.html', {})
+            return render(request, 'html/login.html', {})
         else:
             return HttpResponse("form is not valid")
 
@@ -34,8 +34,14 @@ def signin_view(request):
         if request.method == 'POST':
             form = LoginForm(request.POST)
             if(form.is_valid()):
-                log_in(request, form.data['RID'], form.data['RPassword'])
-                return redirect(select_view)
+                red = log_in(request, form.data['RID'], form.data['RPassword'])
+                if red:
+                    if request.session['type'] == '0':
+                        return redirect(select_view)
+                    else:
+                        return redirect(set_view)
+                else:
+                    return HttpResponse("failed to connect")
             return HttpResponse("The form is not valid")
     else:
         return redirect(index_view)
@@ -78,21 +84,25 @@ def test_session_id(request):
     return HttpResponse(request.session.session_key)
 
 def setblood_view(request):
-    if request.method == 'GET':
-        form = SetBloodForm()
-        datacrypt = getid(request)
-        datadecrypt = []
-        for id in datacrypt:
-            datadecrypt.append(decryptWord(id))
-        args = {'form' : form, 'data': datadecrypt}
-        return render(request, 'html/setblood.html', args)
-    if request.method == 'POST':
-        form = SetBloodForm(request.POST)
-        if(form.is_valid()):
-            response = setblood(request, form)
-            return HttpResponse(response['status'])
-
-        return HttpResponse('Post information failed')
+    if request.session.has_key('type'):
+        if request.session['type'] == '1':
+            if request.method == 'GET':
+                form = SetBloodForm()
+                datacrypt = getid(request)
+                datadecrypt = []
+                form.fields['RID'].choices = datacrypt
+                args = {'form' : form}
+                return render(request, 'html/setblood.html', args)
+            if request.method == 'POST':
+                form = SetBloodForm(request.POST)
+                if(form.is_valid()):
+                    response = setblood(request, form)
+                    return HttpResponse(response['status'])
+                return HttpResponse('Post information failed')
+        else:
+            return redirect(index_view)
+    else:
+        return redirect(index_view)
 
 def getblood_view(request):
     response = getblood(request)
@@ -112,22 +122,28 @@ def getblood_view(request):
     return render(request, 'html/getblood.html', args)
 
 def seturine_view(request):
-    if request.method == 'GET':
-        form = SetUrineForm()
-        
-        datacrypt = getid(request)
-        form.fields['RID'].choices = datacrypt
-        #form.RID.CHOICES=datacrypt
-        datadecrypt = []
-    
-        args = {'form' : form}
-        return render(request, 'html/seturine.html', args)
-    if request.method == 'POST':
-        form = SetUrineForm(request.POST)
-        if(form.is_valid()):
-            response = seturine(request, form)
-            return HttpResponse(response['status'])
-        return HttpResponse('Post information failed')
+    if request.session.has_key('type'):
+        if request.session['type'] == '1':
+            if request.method == 'GET':
+                form = SetUrineForm()
+                
+                datacrypt = getid(request)
+                form.fields['RID'].choices = datacrypt
+                datadecrypt = []
+            
+                args = {'form' : form}
+                return render(request, 'html/seturine.html', args)
+            if request.method == 'POST':
+                form = SetUrineForm(request.POST)
+                if(form.is_valid()):
+                    response = seturine(request, form)
+                    return HttpResponse(response['status'])
+                return HttpResponse('Post information failed')
+        else:
+            return redirect(index_view)
+    else:
+        return redirect(index_view)
+
 
 def geturine_view(request):
     response = geturine(request)
@@ -145,34 +161,58 @@ def geturine_view(request):
     else:
         args = {'data' : response}
     return render(request, 'html/geturine.html', args)
-    # if response:
-        
-    # else:
-    #     return HttpResponse('There is no information for this user')
 
 def setdiabete_view(request):
-    if request.method == 'GET':
-        form = SetDiabeteForm()
-        choice=getid(request)
-        datacrypt = getid(request)
-        datadecrypt = []
-        for id in datacrypt:
-            datadecrypt.append(decryptWord(id))
-        args = {'form' : form, 'data' : datadecrypt}
-        return render(request, 'html/setdiabete.html', args)
-    if request.method == 'POST':
-        form = SetDiabeteForm(request.POST)
-        if(form.is_valid()):
-            response = setdiabete(request, form)
-            return HttpResponse(response['status'])
-        return HttpResponse('Post information failed')
+    if request.session.has_key('type'):
+        if request.session['type'] == '1':
+            if request.method == 'GET':
+                form = SetDiabeteForm()
+                choice=getid(request)
+                datacrypt = getid(request)
+                datadecrypt = []
+                for id in datacrypt:
+                    datadecrypt.append(decryptWord(id))
+                args = {'form' : form, 'data' : datadecrypt}
+                return render(request, 'html/setdiabete.html', args)
+            if request.method == 'POST':
+                form = SetDiabeteForm(request.POST)
+                if(form.is_valid()):
+                    response = setdiabete(request, form)
+                    return HttpResponse(response['status'])
+                return HttpResponse('Post information failed')
+        else:
+            return redirect(index_view)
+    else:
+        return redirect(index_view)
 
 def getdiabete_view(request):
     response = getdiabete(request)
-    return HttpResponse(response['msg'])
+    if response:
+        new_response = []
+        for x in response:
+            print(x)
+            for k, v in x.items():
+                if k == 'DateOfDemand':
+                    pass
+                else:
+                    x[k] = decryptWord(v)
+            new_response.append(x)
+        args = {'data' : new_response}
+    else:
+        args = {'data' : response}
+    return render(request, 'html/getblood.html', args)
 
 def index2_view(request):
     return render(request, 'html/index2.html', {})
 
 def select_view(request):
-    return render(request, 'html/select.html', {})
+    if request.session['type'] == '0':
+        return render(request, 'html/select.html', {})
+    else:
+        return redirect(index_view)   
+
+def set_view(request):
+    if request.session['type'] == '1':
+        return render(request, 'html/set.html', {})
+    else:
+        return redirect(index_view)
