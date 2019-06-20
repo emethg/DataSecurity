@@ -1,6 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
 import re
+# from .getpost import getid
 
 
 class RegisterForm(forms.Form):
@@ -84,7 +85,7 @@ class SetBloodForm(forms.Form):
 
 
 class SetUrineForm(forms.Form):
-    CHOICES = [('341094993', '341094993'), ('2', 'Second')]
+    CHOICES = [('f','f')]
     RID = forms.ChoiceField(label='RID',widget=forms.Select, choices=CHOICES)
     RID.widget.attrs.update({'class': 'form-control'})
     # RID = forms.CharField(label='RID', max_length=9)
