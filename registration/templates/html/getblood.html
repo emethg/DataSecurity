@@ -33,7 +33,16 @@
                   <th>Alkaline_Phosphatase</th>
                   <th>ALT</th>
                   
-                  <!-- if diabete -->
+                  {% if request.session.du %}
+                  <th>Albumin</th>
+                  <th>FGP</th>
+                  <th>RPG</th>
+                  <th>CGTT</th>
+                  <th>CapillaryGlucose</th>
+                  <th>HBA1C</th>
+            
+
+                    {% endif %}
                   
                 </tr>
               </thead>
@@ -60,7 +69,17 @@
                         <td>{{element.Alkaline_Phosphatase}}</td>
                         <td>{{element.ALT}}</td>
 
-                        <!-- if diabete -->
+
+                        {% if request.session.du %}
+                        
+                        <td>{{element.Albumin}}</td>
+                        <td>{{element.FGP}}</td>
+                        <td>{{element.RPG}}</td>
+                        <td>{{element.CGTT}}</td>
+                        <td>{{element.CapillaryGlucose}}</td>
+                        <td>{{element.HBA1C}}</td>
+
+                        {% endif %}
 
 
                     </tr>

@@ -52,7 +52,9 @@ class LoginForm(forms.Form):
             return False
     
 class SetBloodForm(forms.Form):
-    RID = forms.CharField(label='RID', max_length=100)
+    CHOICES = [('f','f')]
+    RID = forms.ChoiceField(label='RID',widget=forms.Select, choices=CHOICES)
+    RID.widget.attrs.update({'class': 'form-control'})
     Glucose = forms.DecimalField(label='Glucose', max_value=10, min_value=0, decimal_places=2)
     Urea = forms.DecimalField(label='Urea', max_value=10, min_value=0, decimal_places=2)
     Creatinine = forms.DecimalField(label='Creatinine', max_value=10, min_value=0, decimal_places=2)
@@ -112,7 +114,9 @@ class SetUrineForm(forms.Form):
             return False
 
 class SetDiabeteForm(forms.Form):
-    RID = forms.CharField(label='RID', max_length=100)
+    CHOICES = [('f','f')]
+    RID = forms.ChoiceField(label='RID',widget=forms.Select, choices=CHOICES)
+    RID.widget.attrs.update({'class': 'form-control'})
     Glucose = forms.DecimalField(label='Glucose', max_value=10, min_value=0, decimal_places=2)
     Albumin = forms.DecimalField(label='Albumin', max_value=10, min_value=0, decimal_places=2)
     FGP = forms.DecimalField(label='FGP', max_value=10, min_value=0, decimal_places=2)
@@ -120,6 +124,22 @@ class SetDiabeteForm(forms.Form):
     CGTT = forms.DecimalField(label='CGTT', max_value=10, min_value=0, decimal_places=2)
     CapillaryGlucose = forms.DecimalField(label='CapillaryGlucose', max_value=10, min_value=0, decimal_places=2)
     HBA1C = forms.DecimalField(label='HBA1C', max_value=10, min_value=0, decimal_places=2)
+    Urea = forms.DecimalField(label='Urea', max_value=10, min_value=0, decimal_places=2)
+    Creatinine = forms.DecimalField(label='Creatinine', max_value=10, min_value=0, decimal_places=2)
+    eGFR = forms.DecimalField(label='eGFR', max_value=10, min_value=0, decimal_places=2)
+    UricAcid = forms.DecimalField(label='UricAcid', max_value=10, min_value=0, decimal_places=2)
+    Potassium = forms.DecimalField(label='Potassium', max_value=10, min_value=0, decimal_places=2)
+    Sodium = forms.DecimalField(label='Sodium', max_value=10, min_value=0, decimal_places=2)
+    Calcium = forms.DecimalField(label='Calcium', max_value=10, min_value=0, decimal_places=2)
+    Phosphore = forms.DecimalField(label='Phosphore', max_value=10, min_value=0, decimal_places=2)
+    Magnesium = forms.DecimalField(label='Magnesium', max_value=10, min_value=0, decimal_places=2)
+    Cholesterol = forms.DecimalField(label='Cholesterol', max_value=10, min_value=0, decimal_places=2)
+    Triglycerides = forms.DecimalField(label='Triglycerides', max_value=10, min_value=0, decimal_places=2)
+    Protein = forms.DecimalField(label='Protein', max_value=10, min_value=0, decimal_places=2)
+    Bilirubin_b = forms.DecimalField(label='Bilirubin_b', max_value=10, min_value=0, decimal_places=2)
+    Alkaline_Phosphatase = forms.DecimalField(label='Alkaline_Phosphatase', max_value=10, min_value=0, decimal_places=2)
+    ALT = forms.DecimalField(label='ALT', max_value=10, min_value=0, decimal_places=2)
+
 
     def check_RID(self):
         if len(self.data['RID']) != 9:

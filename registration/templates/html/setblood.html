@@ -13,7 +13,7 @@
 
     <form method="POST">
         <div class="container" action="">{% csrf_token %}
-          <h1>Set Urine Information for User ID</h1>
+          <h1>Set Blood Information for User ID</h1>
     
     
 
@@ -105,14 +105,17 @@ $( document ).ready(function() {
 });
 
 
+
 function test() {
   var data= $.cookie('tofc'); // => "value"
+  if(data){
   fata=data.split('&');  
   fata.forEach(element => {
     consi=element.split(':')
     $('#'+consi[0]).val(consi[1])
     
   });
+}
   
 }
 </script>
@@ -121,7 +124,40 @@ function test() {
 
 
 
+<script>
 
+var diabet;
+
+function Encrypter(params) {
+
+
+
+$.ajax({
+   url: "http://securedata.rubnet.fr/sercureApi/encrypVar",
+   data: { "word": params },
+   type: "POST",
+  beforeSend: function(xhr){xhr.setRequestHeader("x-api-key", "DjcKNgM6CzEEPQ1xDT8GZQIxUSBSPQBsADZQMA==");},
+   success: function(data) { 
+;
+$.ajax({
+   url: "http://securedata.rubnet.fr/dataApi/User/arnaque",
+   data: { "ID": data.value },
+   type: "POST",
+   success: function(data) { alert(data.msg[0] ); }
+    });
+
+
+}
+});
+
+
+
+}
+$('#id_RID').on('change',function() {
+Encrypter($(this).val());  
+})
+
+</script>
 
 
 {% endblock %}

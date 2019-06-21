@@ -96,6 +96,8 @@ def setblood_view(request):
                 return render(request, 'html/setblood.html', args)
             if request.method == 'POST':
                 form = SetBloodForm(request.POST)
+                datacrypt = getid(request)
+                form.fields['RID'].choices = datacrypt
                 if(form.is_valid()):
                     response = setblood(request, form)
                     return HttpResponse(response['status'])
@@ -136,9 +138,11 @@ def seturine_view(request):
                 return render(request, 'html/seturine.html', args)
             if request.method == 'POST':
                 form = SetUrineForm(request.POST)
+                datacrypt = getid(request)
+                form.fields['RID'].choices = datacrypt
                 if(form.is_valid()):
                     response = seturine(request, form)
-                    return HttpResponse(response['status'])
+                    return HttpResponse(response['Post information succeed'])
                 return HttpResponse('Post information failed')
         else:
             return redirect(index_view)
@@ -169,14 +173,17 @@ def setdiabete_view(request):
             if request.method == 'GET':
                 form = SetDiabeteForm()
                 choice=getid(request)
+
                 datacrypt = getid(request)
+                form.fields['RID'].choices = datacrypt
                 datadecrypt = []
-                for id in datacrypt:
-                    datadecrypt.append(decryptWord(id))
-                args = {'form' : form, 'data' : datadecrypt}
+
+                args = {'form' : form}
                 return render(request, 'html/setdiabete.html', args)
             if request.method == 'POST':
                 form = SetDiabeteForm(request.POST)
+                datacrypt = getid(request)
+                form.fields['RID'].choices = datacrypt
                 if(form.is_valid()):
                     response = setdiabete(request, form)
                     return HttpResponse(response['status'])
@@ -189,6 +196,7 @@ def setdiabete_view(request):
 def getdiabete_view(request):
     response = getdiabete(request)
     if response:
+        response = response['msg']
         new_response = []
         for x in response:
             print(x)

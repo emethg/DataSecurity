@@ -60,6 +60,7 @@ def seturine(request, form):
                 '&Leucocytes='+encryptWord(form.data['Leucocytes']) + \
                 '&Erythrocytes='+encryptWord(form.data['Erythrocytes']) + \
                 '&Albumin='+encryptWord(form.data['Albumin'])
+                
     headers = {
         'x-api-key':  DB_KEY,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -93,7 +94,22 @@ def setdiabete(request, form):
                 '&RPG='+encryptWord(form.data['RPG']) + \
                 '&CGTT='+encryptWord(form.data['CGTT']) + \
                 '&CapillaryGlucose='+encryptWord(form.data['CapillaryGlucose']) + \
-                '&HBA1C='+encryptWord(form.data['HBA1C'])
+                '&HBA1C='+encryptWord(form.data['HBA1C']) + \
+                '&Urea='+encryptWord(form.data['Urea']) + \
+                '&Creatinine='+encryptWord(form.data['Creatinine']) + \
+                '&eGFR='+encryptWord(form.data['eGFR']) + \
+                '&UricAcid='+encryptWord(form.data['UricAcid']) + \
+                '&Potassium='+encryptWord(form.data['Potassium']) + \
+                '&Sodium='+encryptWord(form.data['Sodium']) + \
+                '&Calcium='+encryptWord(form.data['Calcium'])+ \
+                '&Phosphore='+encryptWord(form.data['Phosphore'])+ \
+                '&Magnesium='+encryptWord(form.data['Magnesium']) + \
+                '&Cholesterol='+encryptWord(form.data['Cholesterol']) + \
+                '&Triglycerides='+encryptWord(form.data['Triglycerides']) + \
+                '&Protein='+encryptWord(form.data['Protein']) + \
+                '&Bilirubin_b='+encryptWord(form.data['Bilirubin_b']) + \
+                '&Alkaline_Phosphatase='+encryptWord(form.data['Alkaline_Phosphatase']) + \
+                '&ALT='+ encryptWord(form.data['ALT'])
     headers = {
         'x-api-key': DB_KEY,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -104,7 +120,7 @@ def setdiabete(request, form):
 def getdiabete(request):
     DB_KEY = os.environ.get('DB_KEY_DS')
     if request.session['log']:
-        url = 'http://securedata.rubnet.fr/dataApi/dataMedical/diabetes?ID='+request.session['id']
+        url = 'http://securedata.rubnet.fr/dataApi/dataMedical/diabetes?ID='+request.session['RID']
         payload = {}
         headers = {
             'x-api-key': DB_KEY

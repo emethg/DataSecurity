@@ -1,10 +1,144 @@
-<form method="POST">
-    <div class="container" action="">{% csrf_token %}
-      <h1>Set Diabete Information for User ID</h1>
 
-      {{form}}
+{% extends 'html/layout.html' %}
 
-    </div>
+{% block content %}
+{% load static %}
+<style>
+.th{
+  text-align: center !important;
+}
+</style>
+<section class="text-center" id="home" >
+
+
+    <form method="POST">
+        <div class="container" action="">{% csrf_token %}
+          <h1>Set Diabete Information for User ID</h1>
+    
+    
+
+          <div class="container">
+              
+              <p>:</p>            
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                  
+                      <th>ID</th>
+                      <th>Glucose</th>
+                      <th>Albumine</th>
+                      <th>Fgp</th>
+                      <th>Rpg</th>
+                      <th>Cgtt</th>
+                      <th>Gapillary glucose</th>
+                      <th>Hba1c</th>
+                      <th>Urea</th>
+                      <th>Creatinine</th>
+                      <th>eGFR</th>
+                      <th>UricAcid</th>
+                      <th>Potassium</th>
+                      <th>Sodium</th>
+                      <th>Calcium</th>
+                      <th>Phosphore</th>
+                      <th>Magnesium</th>
+                      <th>Cholesterol</th>
+                      <th>Triglycerides</th>
+                      <th>Protein</th>
+                      <th>Bilirubin</th>
+                      <th>Alkaline_Phosphatase</th>
+                      <th>ALT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                       
+                       <tr>
+                             
+                          
+                          <td>{{form.RID}}</td>
+                           <td>{{form.Glucose}}</td>
+
+                           <td>{{form.Albumin}}</td>
+                           <td>{{form.FGP}}</td>
+                           <td>{{form.RPG}}</td>
+                           <td>{{form.CGTT}}</td>
+                           <td>{{form.CapillaryGlucose}}</td>
+                           <td>{{form.HBA1C}}</td>
+                          
+
+                         <td>{{form.Urea}}</td>
+                         <td>{{form.Creatinine}}</td>
+                         <td>{{form.eGFR}}</td>
+                         <td>{{form.UricAcid}}</td>
+                         <td>{{form.Potassium}}</td>
+                         <td>{{form.Sodium}}</td>
+                         <td>{{form.Calcium}}</td>
+                         <td>{{form.Phosphore}}</td>
+                         <td>{{form.Magnesium}}</td>
+                         <td>{{form.Cholesterol}}</td>
+                         <td>{{form.Triglycerides}}</td>
+                         <td>{{form.Protein}}</td>
+                         <td>{{form.Bilirubin_b}}</td>
+                         <td>{{form.Alkaline_Phosphatase}}</td>
+                         <td>{{form.ALT}}</td>
+                      </tr>
+                     
+                  
+                           
+                 
+                
+                </tbody>
+              </table>
+            </div>
+    
+        </div>
+        <button class="icon-btn add-btn seturinebtn" type="submit">
+            <div class="add-icon"></div>            
+            <div class="btn-txt">Set Information</div>
+          </button>
+     
+    </form>
+
+<script>
+var arr=[]
+$( document ).ready(function() {
+  test();
+  $('input').on('change',function() {
+
+   arr[$(this).attr('id')]=$(this).val();
+   
+    c=arr.join('#')
+
+    for (const [key, value] of Object.entries(arr)) {
+        if(c!='')c+='&'
+        c+= key+':'+value;
+      }
+    
+  $.cookie('tofc',c , { expires: 7 });
+
+  })
+});
+
+
+function test() {
+  var data= $.cookie('tofc'); // => "value"
+  if(data){
+  fata=data.split('&');  
+  fata.forEach(element => {
+    consi=element.split(':')
+    $('#'+consi[0]).val(consi[1])
+    
+  });
+}
   
-    <button type="submit" class="seturinebtn">Set Information</button>
-</form>
+}
+</script>
+  
+</section>
+
+
+
+
+
+
+{% endblock %}

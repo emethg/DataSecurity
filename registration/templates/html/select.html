@@ -4,11 +4,18 @@
 {% load static %}
 
 <ul>
-    
+    {% if request.session.du == 'False' %}
     <li>
         <a href="{% url 'getblood' %}">Print your blood information</a>
     </li>
+    {% endif %}
+    {% if request.session.du == 'True' %}
     <li>
+            <a href="{% url 'getdiabete' %}">Print your diabete information</a>
+        </li>
+    
+    <li>
+    {% endif %}
         <a href="{% url 'geturine' %}">Print your urine information</a>
     </li>
 </ul>
